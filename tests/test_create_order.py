@@ -45,6 +45,7 @@ class TestCreateOrder:
         data = response.json()
         assert response.status_code == 400
         assert data["success"] == False
+        assert response.json()['message'] == 'Ingredient ids must be provided'
 
 
     @allure.title('Проверка создания заказа без ингредиентов не авторизованным пользователем')
@@ -55,6 +56,7 @@ class TestCreateOrder:
         data = response.json()
         assert response.status_code == 400
         assert data["success"] == False
+        assert response.json()['message'] == 'Ingredient ids must be provided'
 
 
     @allure.title('Проверка создания заказа с неверным хешем ингредиентов авторизованным пользователем')
@@ -65,3 +67,4 @@ class TestCreateOrder:
         payload = {'ingredients': ['51c0c5a71d1f82001bdaaa6']}
         response = requests.post(f'{Urls.GET_USER_ORDERS}', data=payload, headers=headers)
         assert response.status_code == 500
+

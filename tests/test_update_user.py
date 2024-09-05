@@ -18,10 +18,8 @@ class TestUpdateUser:
         access_token = create_new_user[1]["accessToken"]
         headers = {"Authorization": f"{access_token}"}
         payload = update_data
-        print('old', create_new_user)
         response = requests.patch(f'{Urls.UPDATE_USER}', data=payload, headers=headers)
         data = response.json()
-        print('new', data)
 
         assert response.status_code == 200 and data["success"] == True
 
